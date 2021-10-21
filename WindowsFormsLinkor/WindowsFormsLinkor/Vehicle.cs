@@ -10,11 +10,11 @@ namespace WindowsFormsLinkor
     public abstract class Vehicle : ITransport
     {
         /// <summary>
-        /// Левая координата отрисовки автомобиля
+        /// Левая координата отрисовки корабля
         /// </summary>
         protected float _startPosX;
         /// <summary>
-        /// Правая кооридната отрисовки автомобиля
+        /// Правая кооридната отрисовки корабля
         /// </summary>
         protected float _startPosY;
         /// <summary>
@@ -30,11 +30,11 @@ namespace WindowsFormsLinkor
         /// </summary>
         public int MaxSpeed { protected set; get; }
         /// <summary>
-        /// Вес автомобиля
+        /// Вес 
         /// </summary>
         public float Weight { protected set; get; }
         /// <summary>
-        /// Основной цвет кузова
+        /// Основной 
         /// </summary>
         public Color MainColor { protected set; get; }
         public void SetPosition(int x, int y, int width, int height)

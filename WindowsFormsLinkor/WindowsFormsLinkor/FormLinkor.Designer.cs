@@ -52,7 +52,7 @@
             // 
             this.buttonCreateWarship.Location = new System.Drawing.Point(12, 12);
             this.buttonCreateWarship.Name = "buttonCreateWarship";
-            this.buttonCreateWarship.Size = new System.Drawing.Size(179, 23);
+            this.buttonCreateWarship.Size = new System.Drawing.Size(264, 23);
             this.buttonCreateWarship.TabIndex = 11;
             this.buttonCreateWarship.Text = "Создать боевой корабль";
             this.buttonCreateWarship.Click += new System.EventHandler(this.buttonCreateWarship_Click);
@@ -110,7 +110,7 @@
             // 
             // buttonCreateLinkor
             // 
-            this.buttonCreateLinkor.Location = new System.Drawing.Point(197, 12);
+            this.buttonCreateLinkor.Location = new System.Drawing.Point(282, 12);
             this.buttonCreateLinkor.Name = "buttonCreateLinkor";
             this.buttonCreateLinkor.Size = new System.Drawing.Size(179, 23);
             this.buttonCreateLinkor.TabIndex = 12;

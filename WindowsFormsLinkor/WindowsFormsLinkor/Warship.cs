@@ -11,19 +11,19 @@ namespace WindowsFormsLinkor
     {
 
         /// <summary>
-        /// Ширина отрисовки автомобиля
+        /// Ширина отрисовки корабля
         /// </summary>
         protected readonly int warshipWidth = 100;
         /// <summary>
-        /// Высота отрисовки автомобиля
+        /// Высота отрисовки корабля
         /// </summary>
         protected readonly int warshipHeight = 60;
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
-        /// <param name="weight">Вес автомобиля</param>
-        /// <param name="mainColor">Основной цвет кузова</param>
+        /// <param name="weight">Вес </param>
+        /// <param name="mainColor">Основной цвет </param>
         public Warship(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
@@ -31,13 +31,13 @@ namespace WindowsFormsLinkor
             MainColor = mainColor;
         }
         /// <summary>
-        /// Конструкторс изменением размеров машины
+        /// Конструктор изменения размеров корабля
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
-        /// <param name="weight">Вес автомобиля</param>
-        /// <param name="mainColor">Основной цвет кузова</param>
-        /// <param name="carWidth">Ширина отрисовки автомобиля</param>
-        /// <param name="carHeight">Высота отрисовки автомобиля</param>
+        /// <param name="weight">Вес </param>
+        /// <param name="mainColor">Основной цвет </param>
+        /// <param name="warshipWidth">Ширина отрисовки корабля</param>
+        /// <param name="warshipHeight">Высота отрисовки корабля</param>
         protected Warship(int maxSpeed, float weight, Color mainColor, int warshipWidth, int
         warshipHeight)
         {
@@ -110,7 +110,7 @@ namespace WindowsFormsLinkor
 
             g.FillPolygon(br, curvePoints);
 
-            //если что убрать
+            
             Brush br_dop = new SolidBrush(Color.Brown);
             g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 5, 8, 8);
             g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 15, 8, 8);

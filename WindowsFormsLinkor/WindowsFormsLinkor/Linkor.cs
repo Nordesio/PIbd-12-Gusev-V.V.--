@@ -25,7 +25,7 @@ namespace WindowsFormsLinkor
         /// <summary>
         /// Признак наличия заднего спойлера
         /// </summary>
-        public bool Roundels { private set; get; }
+       
         /// <summary>
         /// Инициализация свойств
         /// </summary>
@@ -36,33 +36,29 @@ namespace WindowsFormsLinkor
         /// <param name="frontWeapon">Признак наличия переднего орудия</param>
         /// <param name="sideWeapon">Признак наличия боковых орудий</param>
         /// <param name="backWeapon">Признак наличия заднего орудия</param>
-        /// <param name="roundels">Признак наличия "круглешков" позади орудий</param>
+     
         public Linkor(int maxSpeed, float weigth, Color mainColor, Color dopColor, bool frontWeapon,
-            bool sideWeapon, bool backWeapon, bool roundels) :
-            base(maxSpeed, weigth, mainColor, 100, 600)
+            bool sideWeapon, bool backWeapon) :
+            base(maxSpeed, weigth, mainColor, 100, 60)
         {
            
             DopColor = dopColor;
             FrontWeapon = frontWeapon;
             SideWeapon = sideWeapon;
             BackWeapon = backWeapon;
-            Roundels = roundels;
+         
         }
        
         public override void DrawTransport(Graphics g)
         {
            Brush br_dop = new SolidBrush(DopColor);
-           Brush br = new SolidBrush(Color.Black);
+
             base.DrawTransport(g);
             //Переднее орудие
             if (FrontWeapon)
             {
                 g.FillRectangle(br_dop, _startPosX + 60, _startPosY + 5, 20, 5);
                 g.FillRectangle(br_dop, _startPosX + 60, _startPosY + 30, 20, 5);
-
-
-
-
             }
             
             //боковые
@@ -88,15 +84,7 @@ namespace WindowsFormsLinkor
                 g.FillRectangle(br_dop, _startPosX - 18, _startPosY + 5, 10, 30);
 
             }
-            if (Roundels)
-            {
-                // "кругляшки" сзади бокового орудия и спереди
 
-                g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 5, 8, 8);
-                g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 15, 8, 8);
-                g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 25, 8, 8);
-
-            }
             
         }
     }

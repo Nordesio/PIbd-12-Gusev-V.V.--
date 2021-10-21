@@ -21,7 +21,7 @@ namespace WindowsFormsLinkor
 
 void SetPosition(int x, int y, int width, int height);
         /// <summary>
-        /// Изменение направления пермещения
+        /// Изменение направления перемещения
         /// </summary>
         /// <param name="direction">Направление</param>
         void MoveTransport(Directions direction);

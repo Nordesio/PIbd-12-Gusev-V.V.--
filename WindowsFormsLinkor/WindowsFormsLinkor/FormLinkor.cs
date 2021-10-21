@@ -21,7 +21,7 @@ namespace WindowsFormsLinkor
             InitializeComponent();
         }
         /// <summary>
-        /// Метод отрисовки машины
+        /// Метод отрисовки корабля
         /// </summary>
         private void Draw()
         {
@@ -31,7 +31,7 @@ namespace WindowsFormsLinkor
             pictureBoxLinkor.Image = bmp;
         }
 /// <summary>
-/// Обработка нажатия кнопки "Создать автомобиль"
+/// Обработка нажатия кнопки "Создать боевой корабль"
 /// </summary>
 /// <param name="sender"></param>
 
@@ -46,7 +46,7 @@ private void buttonCreateWarship_Click(object sender, EventArgs e)
             Draw();
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Создать гоночный автомобиль"
+        /// Обработка нажатия кнопки "Создать линкор"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,7 +54,7 @@ private void buttonCreateWarship_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
             warship = new Linkor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan,
-            Color.Brown, true, true, true, true);
+            Color.Brown, true, true, true);
             warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
             Draw();
         }
