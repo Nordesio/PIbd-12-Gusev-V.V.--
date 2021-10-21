@@ -12,7 +12,7 @@ namespace WindowsFormsLinkor
 {
     public partial class FormLinkor : Form
     {
-        private Linkor linkor;
+        private ITransport warship;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -20,26 +20,42 @@ namespace WindowsFormsLinkor
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Метод отрисовки машины
+        /// </summary>
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxLinkor.Width, pictureBoxLinkor.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            linkor.DrawTransport(gr);
+            warship.DrawTransport(gr);
             pictureBoxLinkor.Image = bmp;
         }
-        /// <summary>
-        /// Обработка нажатия кнопки "Создать"
-        /// </summary>
+/// <summary>
+/// Обработка нажатия кнопки "Создать автомобиль"
+/// </summary>
+/// <param name="sender"></param>
 
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonCreate_Click(object sender, EventArgs e)
+
+
+/// <param name="e"></param>
+private void buttonCreateWarship_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            linkor = new Linkor();
-            linkor.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan,
-           Color.Brown, true, true, true, true); linkor.SetPosition(50,
-           50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
+            warship = new Warship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan);
+            warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
+            Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Создать гоночный автомобиль"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCreateLinkor_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            warship = new Linkor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan,
+            Color.Brown, true, true, true, true);
+            warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
             Draw();
         }
         /// <summary>
@@ -54,19 +70,26 @@ namespace WindowsFormsLinkor
             switch (name)
             {
                 case "buttonUp":
-                    linkor.MoveTransport(Directions.Up);
+                    warship.MoveTransport(Directions.Up);
+
                     break;
                 case "buttonDown":
-                    linkor.MoveTransport(Directions.Down);
+                    warship.MoveTransport(Directions.Down);
+
                     break;
                 case "buttonLeft":
-                    linkor.MoveTransport(Directions.Left);
+                    warship.MoveTransport(Directions.Left);
+
                     break;
                 case "buttonRight":
-                    linkor.MoveTransport(Directions.Right);
+                    warship.MoveTransport(Directions.Right);
+
                     break;
+
             }
             Draw();
         }
+
+
     }
 }
