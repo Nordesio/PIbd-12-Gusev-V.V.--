@@ -48,7 +48,11 @@ namespace WindowsFormsLinkor
             BackWeapon = backWeapon;
          
         }
-       
+        public override void MoveTransport(Directions direction)
+        {
+            base.MoveTransport(direction);
+        }
+
         public override void DrawTransport(Graphics g)
         {
            Brush br_dop = new SolidBrush(DopColor);
