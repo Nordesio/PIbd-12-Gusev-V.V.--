@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsLinkor
 {
-    enum Directions
+    public enum Directions
     {
         Up,
 
