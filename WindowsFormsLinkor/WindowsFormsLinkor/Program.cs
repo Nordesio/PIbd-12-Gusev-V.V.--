@@ -16,7 +16,7 @@ namespace WindowsFormsLinkor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLinkor());
+            Application.Run(new FormParking());
         }
     }
 }

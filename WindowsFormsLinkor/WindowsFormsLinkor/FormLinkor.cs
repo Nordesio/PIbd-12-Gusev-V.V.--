@@ -20,6 +20,18 @@ namespace WindowsFormsLinkor
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Передача машины на форму
+        /// </summary>
+        /// <param name="car"></param>
+        public void SetWarship(ITransport warship)
+        {
+            this.warship = warship;
+            warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
+            Draw();
+        }
+
         /// <summary>
         /// Метод отрисовки корабля
         /// </summary>
@@ -38,11 +50,11 @@ namespace WindowsFormsLinkor
 
 
 /// <param name="e"></param>
-private void buttonCreateWarship_Click(object sender, EventArgs e)
+        private void buttonCreateWarship_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
             warship = new Warship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan);
-            warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
+            warship.SetPosition(100, 100, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
             Draw();
         }
         /// <summary>
@@ -55,7 +67,7 @@ private void buttonCreateWarship_Click(object sender, EventArgs e)
             Random rnd = new Random();
             warship = new Linkor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Cyan,
             Color.Brown, true, true, true);
-            warship.SetPosition(50, 50, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
+            warship.SetPosition(100, 100, pictureBoxLinkor.Width, pictureBoxLinkor.Height);
             Draw();
         }
         /// <summary>
@@ -90,6 +102,9 @@ private void buttonCreateWarship_Click(object sender, EventArgs e)
             Draw();
         }
 
+        private void pictureBoxLinkor_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

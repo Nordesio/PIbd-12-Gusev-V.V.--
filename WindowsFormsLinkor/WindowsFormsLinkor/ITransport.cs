@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsLinkor
 {
-    interface ITransport
+    public interface ITransport
     {
         /// <summary>
 /// Установка позиции

@@ -9,7 +9,7 @@ namespace WindowsFormsLinkor
 {
     public class Warship : Vehicle
     {
-
+        
         /// <summary>
         /// Ширина отрисовки корабля
         /// </summary>
