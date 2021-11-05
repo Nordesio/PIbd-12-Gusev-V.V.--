@@ -16,6 +16,14 @@ namespace WindowsFormsLinkor
         /// Объект от класса-парковки
         /// </summary>
         private readonly Parking<Warship> parking;
+
+
+
+        public void Compare()
+        {
+            
+        }
+
         public FormParking()
         {
             InitializeComponent();

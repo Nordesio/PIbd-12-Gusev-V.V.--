@@ -50,6 +50,9 @@ public Parking(int picWidth, int picHeight)
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
+
+
+
         /// <summary>
         /// Перегрузка оператора сложения
         /// Логика действия: на парковку добавляется автомобиль
@@ -57,23 +60,19 @@ public Parking(int picWidth, int picHeight)
         /// <param name="p">Парковка</param>
         /// <param name="car">Добавляемый автомобиль</param>
         /// <returns></returns>
+        /// 
+
         public static int operator +(Parking<T> p, T warship)
         {
-            int i = 0;
-           while (i <15 && p._places[i] != null)
+           for(int i = 0; i < p._places.Length; i++)
             {
-                i++;
+                if (p._places[i] == null)
+                {
+                    p._places[i] = warship;
+                    return i;
+                }
             }
-           if (i >= 15)
-            {
-                return i;
-            }
-            else
-            {
-                
-                p._places[i] = warship;
-                return i;
-            }
+            return -1;
         }
         /// <summary>
         /// Перегрузка оператора вычитания
@@ -85,10 +84,16 @@ public Parking(int picWidth, int picHeight)
         /// <returns></returns>
         public static T operator -(Parking<T> p, int index)
         {
-            T a = p._places[index];
-            p._places[index] = null;
-            return a;
-            
+            if (index < p._places.Length)
+            {
+                T a = p._places[index];
+                p._places[index] = null;
+                return a;
+            }
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// Метод отрисовки парковки
@@ -99,11 +104,10 @@ public Parking(int picWidth, int picHeight)
             DrawMarking(g);
             for (int i = 0; i < _places.Length; i++)
             {
-                int y = i%5;
-                int z = i/5;
-                _places[i]?.SetPosition(25 + 210 * z, 25 + 80 * y, 1000, 1000);
+                int y = i%3;
+                int z = i/3;
+                _places[i]?.SetPosition(33 + 210 * y, 25 + 80 * z, pictureWidth, pictureHeight);
                 _places[i]?.DrawTransport(g);
-                
             }
         }
         /// <summary>
@@ -114,10 +118,7 @@ public Parking(int picWidth, int picHeight)
         {
             Pen pen = new Pen(Color.Black, 3);
             for (int i = 0; i < pictureWidth / _placeSizeWidth; i++)
-
-                
-        
-{
+            {
                 for (int j = 0; j < pictureHeight / _placeSizeHeight + 1; ++j)
                 {//линия рамзетки места
                     g.DrawLine(pen, i * _placeSizeWidth, j * _placeSizeHeight, i *
