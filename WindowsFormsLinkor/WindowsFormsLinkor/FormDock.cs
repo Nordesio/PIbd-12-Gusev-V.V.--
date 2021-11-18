@@ -8,26 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
-    public partial class FormParking : Form
+    public partial class FormDock : Form
     {
         /// <summary>
         /// Объект от класса-парковки
         /// </summary>
-        private readonly Parking<Warship> parking;
+        private readonly Dock<Warship> parking;
 
 
-
-        public void Compare()
-        {
-            
-        }
-
-        public FormParking()
+        public FormDock()
         {
             InitializeComponent();
-            parking = new Parking<Warship>(pictureBoxParking.Width, pictureBoxParking.Height);
+            parking = new Dock<Warship>(pictureBoxDock.Width, pictureBoxDock.Height);
             Draw();
         }
         /// <summary>
@@ -35,10 +29,10 @@ namespace WindowsFormsLinkor
         /// </summary>
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
+            Bitmap bmp = new Bitmap(pictureBoxDock.Width, pictureBoxDock.Height);
             Graphics gr = Graphics.FromImage(bmp);
             parking.Draw(gr);
-            pictureBoxParking.Image = bmp;
+            pictureBoxDock.Image = bmp;
         }
         /// <summary>
         /// Обработка нажатия кнопки "Припарковать автомобиль"

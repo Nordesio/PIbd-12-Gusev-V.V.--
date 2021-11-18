@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
     /// <summary>
     /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Parking<T> where T : class, ITransport
+    public class Dock<T> where T : class, ITransport
     {
         /// <summary>
         /// Массив объектов, которые храним
@@ -42,7 +42,7 @@ namespace WindowsFormsLinkor
 /// </summary>
 /// <param name="picWidth">Рамзер парковки - ширина</param>
 /// <param name="picHeight">Рамзер парковки - высота</param>
-public Parking(int picWidth, int picHeight)
+public Dock(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
@@ -62,7 +62,7 @@ public Parking(int picWidth, int picHeight)
         /// <returns></returns>
         /// 
 
-        public static int operator +(Parking<T> p, T warship)
+        public static int operator +(Dock<T> p, T warship)
         {
            for(int i = 0; i < p._places.Length; i++)
             {
@@ -82,7 +82,7 @@ public Parking(int picWidth, int picHeight)
         /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
 
         /// <returns></returns>
-        public static T operator -(Parking<T> p, int index)
+        public static T operator -(Dock<T> p, int index)
         {
             if (index < p._places.Length)
             {

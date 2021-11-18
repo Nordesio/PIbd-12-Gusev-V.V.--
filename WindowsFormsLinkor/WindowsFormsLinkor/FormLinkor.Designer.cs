@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsLinkor
+﻿namespace WindowsFormsWarships
 {
     partial class FormLinkor
     {
@@ -46,7 +46,6 @@
             this.pictureBoxLinkor.Size = new System.Drawing.Size(600, 366);
             this.pictureBoxLinkor.TabIndex = 1;
             this.pictureBoxLinkor.TabStop = false;
-            this.pictureBoxLinkor.Click += new System.EventHandler(this.pictureBoxLinkor_Click);
             // 
             // buttonRight
             // 

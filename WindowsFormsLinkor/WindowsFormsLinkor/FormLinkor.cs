@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
     public partial class FormLinkor : Form
     {
@@ -100,11 +100,6 @@ namespace WindowsFormsLinkor
 
             }
             Draw();
-        }
-
-        private void pictureBoxLinkor_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

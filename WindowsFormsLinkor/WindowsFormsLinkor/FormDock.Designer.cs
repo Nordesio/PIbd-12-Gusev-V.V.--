@@ -1,7 +1,7 @@
 ﻿
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
-    partial class FormParking
+    partial class FormDock
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace WindowsFormsLinkor
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBoxParking = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDock = new System.Windows.Forms.PictureBox();
             this.buttonSetWarship = new System.Windows.Forms.Button();
             this.buttonSetLinkor = new System.Windows.Forms.Button();
             this.buttonTakeWarship = new System.Windows.Forms.Button();
@@ -37,18 +37,18 @@ namespace WindowsFormsLinkor
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDock)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBoxParking
+            // pictureBoxDock
             // 
-            this.pictureBoxParking.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxParking.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxParking.Name = "pictureBoxParking";
-            this.pictureBoxParking.Size = new System.Drawing.Size(754, 450);
-            this.pictureBoxParking.TabIndex = 0;
-            this.pictureBoxParking.TabStop = false;
+            this.pictureBoxDock.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBoxDock.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxDock.Name = "pictureBoxDock";
+            this.pictureBoxDock.Size = new System.Drawing.Size(754, 450);
+            this.pictureBoxDock.TabIndex = 0;
+            this.pictureBoxDock.TabStop = false;
             // 
             // buttonSetWarship
             // 
@@ -117,7 +117,7 @@ namespace WindowsFormsLinkor
             this.maskedTextBox.Size = new System.Drawing.Size(30, 20);
             this.maskedTextBox.TabIndex = 4;
             // 
-            // FormParking
+            // FormPDock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,10 +125,10 @@ namespace WindowsFormsLinkor
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonSetLinkor);
             this.Controls.Add(this.buttonSetWarship);
-            this.Controls.Add(this.pictureBoxParking);
-            this.Name = "FormParking";
-            this.Text = "Парковка";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
+            this.Controls.Add(this.pictureBoxDock);
+            this.Name = "FormPDock";
+            this.Text = "Док";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDock)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -137,7 +137,7 @@ namespace WindowsFormsLinkor
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBoxParking;
+        private System.Windows.Forms.PictureBox pictureBoxDock;
         private System.Windows.Forms.Button buttonSetWarship;
         private System.Windows.Forms.Button buttonSetLinkor;
         private System.Windows.Forms.Button buttonTakeWarship;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsLinkor.Properties
+namespace WindowsFormsWarships.Properties
 {
 
 
