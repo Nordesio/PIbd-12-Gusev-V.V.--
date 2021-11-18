@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
-    interface ITransport
+    public interface ITransport
     {
         /// <summary>
 /// Установка позиции

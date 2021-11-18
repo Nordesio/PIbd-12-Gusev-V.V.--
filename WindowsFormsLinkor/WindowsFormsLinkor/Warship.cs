@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
     public class Warship : Vehicle
     {
-
+        
         /// <summary>
         /// Ширина отрисовки корабля
         /// </summary>

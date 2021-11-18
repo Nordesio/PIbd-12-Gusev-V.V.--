@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace WindowsFormsLinkor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLinkor());
+            Application.Run(new FormDock());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace WindowsFormsLinkor
+namespace WindowsFormsWarships
 {
     public abstract class Vehicle : ITransport
     {
