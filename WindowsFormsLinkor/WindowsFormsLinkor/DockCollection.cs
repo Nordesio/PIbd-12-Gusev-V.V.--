@@ -53,7 +53,7 @@ public void AddDock(string name)
         /// <summary>
         /// Удаление дока
         /// </summary>
-        /// <param name="name">Название парковки</param>
+        /// <param name="name">Название дока</param>
         public void DelDock(string name)
         {
             if (dockStages.ContainsKey(name)) dockStages.Remove(name) ;
