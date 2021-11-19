@@ -150,7 +150,7 @@ namespace WindowsFormsWarships
         {
             if (string.IsNullOrEmpty(textBoxDockName.Text))
             {
-                MessageBox.Show("Введите название парковки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Введите название дока", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             dockCollection.AddDock(textBoxDockName.Text);
@@ -162,7 +162,7 @@ namespace WindowsFormsWarships
         {
             if (listBoxDocks.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку { listBoxDocks.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Удалить док { listBoxDocks.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 {
                     dockCollection.DelDock(listBoxDocks.SelectedItem.ToString());
 

@@ -77,10 +77,10 @@ public Dock(int picWidth, int picHeight)
             {
                 if (p._places.Contains(warship) == false)
                 {
-
                     p._places.Add(warship);
                     return true;
                 }
+
             }
             return false;
         }
