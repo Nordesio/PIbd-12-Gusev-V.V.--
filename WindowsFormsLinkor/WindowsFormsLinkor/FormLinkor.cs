@@ -22,7 +22,7 @@ namespace WindowsFormsWarships
         }
 
         /// <summary>
-        /// Передача машины на форму
+        /// Передача корабля на форму
         /// </summary>
         /// <param name="car"></param>
         public void SetWarship(ITransport warship)

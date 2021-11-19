@@ -8,7 +8,9 @@ namespace WindowsFormsWarships
 {
     class Linkor : Warship
     {
-      
+        /// <summary>
+        /// Дополнительный цвет
+        /// </summary>
         public Color DopColor { private set; get; }
         /// <summary>
         /// Признак наличия переднего орудия
@@ -19,12 +21,10 @@ namespace WindowsFormsWarships
         /// </summary>
         public bool SideWeapon { private set; get; }
         /// <summary>
-        /// Признак наличия заднего спойлера
+        /// Признак наличия заднего оружия
         /// </summary>
         public bool BackWeapon { private set; get; }
-        /// <summary>
-        /// Признак наличия заднего спойлера
-        /// </summary>
+
        
         /// <summary>
         /// Инициализация свойств

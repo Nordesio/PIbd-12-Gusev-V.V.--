@@ -15,9 +15,13 @@ namespace WindowsFormsWarships
     public class Dock<T> where T : class, ITransport
     {
         /// <summary>
-        /// Массив объектов, которые храним
+        /// Список объектов, которые храним
         /// </summary>
-        private readonly T[] _places;
+        private readonly List<T> _places;
+        /// <summary>
+        /// Максимальное количество мест в доке
+        /// </summary>
+        private readonly int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -27,11 +31,11 @@ namespace WindowsFormsWarships
         /// </summary>
         private readonly int pictureHeight;
         /// <summary>
-        /// Размер парковочного места (ширина)
+        /// Размер одного места дока (ширина)
         /// </summary>
         private readonly int _placeSizeWidth = 210;
         /// <summary>
-        /// Размер парковочного места (высота)
+        /// Размер одного места дока (высота)
         /// </summary>
         private readonly int _placeSizeHeight = 80;
 
@@ -40,54 +44,65 @@ namespace WindowsFormsWarships
 /// <summary>
 /// Конструктор
 /// </summary>
-/// <param name="picWidth">Рамзер парковки - ширина</param>
+/// <param name="picWidth">Рамзер дока - ширина</param>
 /// <param name="picHeight">Рамзер парковки - высота</param>
 public Dock(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
 
 
 
         /// <summary>
         /// Перегрузка оператора сложения
-        /// Логика действия: на парковку добавляется автомобиль
+        /// Логика действия: в док добавляется корабль
         /// </summary>
-        /// <param name="p">Парковка</param>
-        /// <param name="car">Добавляемый автомобиль</param>
+        /// <param name="p">Док</param>
+        /// <param name="warship">Добавляемый корабль</param>
         /// <returns></returns>
         /// 
 
-        public static int operator +(Dock<T> p, T warship)
+        public static bool operator +(Dock<T> p, T warship)
         {
-           for(int i = 0; i < p._places.Length; i++)
+            if (p._places.Count >= p._maxCount)
             {
-                if (p._places[i] == null)
-                {
-                    p._places[i] = warship;
-                    return i;
-                }
+                return false;
             }
-            return -1;
+           for(int i = 0; i < p._maxCount; i++)
+            {
+                if (p._places.Contains(warship) == false)
+                {
+                    p._places.Add(warship);
+                    return true;
+                }
+
+            }
+            return false;
         }
         /// <summary>
         /// Перегрузка оператора вычитания
-        /// Логика действия: с парковки забираем автомобиль
+        /// Логика действия: с дока забираем корабль
         /// </summary>
-        /// <param name="p">Парковка</param>
+        /// <param name="p">Док</param>
         /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
 
         /// <returns></returns>
         public static T operator -(Dock<T> p, int index)
         {
-            if (index < p._places.Length)
+            if (p._places.Count - 1< index)
+            {
+                return null;
+            }
+                if (index < p._maxCount)
             {
                 T a = p._places[index];
-                p._places[index] = null;
+               
+                p._places.RemoveAt(index);
                 return a;
             }
             else
@@ -96,13 +111,13 @@ public Dock(int picWidth, int picHeight)
             }
         }
         /// <summary>
-        /// Метод отрисовки парковки
+        /// Метод отрисовки дока
         /// </summary>
         /// <param name="g"></param>
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; i++)
             {
                 int y = i%3;
                 int z = i/3;
@@ -111,7 +126,7 @@ public Dock(int picWidth, int picHeight)
             }
         }
         /// <summary>
-        /// Метод отрисовки разметки парковочных мест
+        /// Метод отрисовки разметки мест дока
         /// </summary>
         /// <param name="g"></param>
         private void DrawMarking(Graphics g)

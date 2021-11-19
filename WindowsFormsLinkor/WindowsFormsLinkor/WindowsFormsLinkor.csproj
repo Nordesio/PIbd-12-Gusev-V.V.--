@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Directions.cs" />
+    <Compile Include="DockCollection.cs" />
     <Compile Include="FormLinkor.cs">
       <SubType>Form</SubType>
     </Compile>

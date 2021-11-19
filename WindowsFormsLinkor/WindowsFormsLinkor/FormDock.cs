@@ -13,72 +13,114 @@ namespace WindowsFormsWarships
     public partial class FormDock : Form
     {
         /// <summary>
-        /// Объект от класса-парковки
+        /// Объект от класса-дока
         /// </summary>
-        private readonly Dock<Warship> parking;
-
+       
+        private readonly DockCollection dockCollection;
 
         public FormDock()
         {
             InitializeComponent();
-            parking = new Dock<Warship>(pictureBoxDock.Width, pictureBoxDock.Height);
+            dockCollection = new DockCollection(pictureBoxDock.Width,pictureBoxDock.Height);
             Draw();
         }
         /// <summary>
         /// Метод отрисовки парковки
         /// </summary>
+       
+        /// <summary>
+        /// Заполнение listBoxLevels
+        /// </summary>
+        private void ReloadLevels()
+        {
+            int index = listBoxDocks.SelectedIndex;
+            listBoxDocks.Items.Clear();
+            
+            for (int i = 0; i < dockCollection.Keys.Count; i++)
+            {
+                listBoxDocks.Items.Add(dockCollection.Keys[i]);
+                
+            }
+            if (listBoxDocks.Items.Count > 0 && (index == -1 || index >=listBoxDocks.Items.Count))
+            {
+                listBoxDocks.SelectedIndex = 0;
+
+            }
+            else if (listBoxDocks.Items.Count > 0 && index > -1 && index <listBoxDocks.Items.Count)
+            {
+                listBoxDocks.SelectedIndex = index;
+
+            }
+            Draw();
+        }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxDock.Width, pictureBoxDock.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            parking.Draw(gr);
-            pictureBoxDock.Image = bmp;
+            if (listBoxDocks.SelectedIndex > -1)
+            {//если выбран один из пуктов в listBox (при старте программы ни один пункт не будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу listBox)
+                Bitmap bmp = new Bitmap(pictureBoxDock.Width, pictureBoxDock.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                dockCollection[listBoxDocks.SelectedItem.ToString()].Draw(gr);
+                pictureBoxDock.Image = bmp;
+            }
+            else if (listBoxDocks.Items.Count == 0)
+            {
+                Bitmap bmp = new Bitmap(pictureBoxDock.Width, pictureBoxDock.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                pictureBoxDock.Image = bmp;
+            }
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать автомобиль"
+        /// Обработка нажатия кнопки "Добавить боевой корабль"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonSetWarship_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxDocks.SelectedIndex > -1)
             {
-                var car = new Warship(100, 1000, dialog.Color);
-                if (parking + car < 15)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Парковка переполнена");
+                    var ship = new Warship(100, 1000, dialog.Color);
+                    if (dockCollection[listBoxDocks.SelectedItem.ToString()] + ship)
+                    {
+                        Draw();
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Док переполнен");
+                    }
                 }
             }
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать гоночный автомобиль"
+        /// Обработка нажатия кнопки "Добавить линкор"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonSetLinkor_Click(object sender, EventArgs e)
 
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxDocks.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var car = new Linkor(100, 1000, dialog.Color, dialogDop.Color, true, true, true);
-                  
-                    if (parking + car < 15)
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+
                     {
-                        Draw();
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
+
+                        var ship = new Linkor(100, 1000, dialog.Color, dialogDop.Color, true, true, true);
+                        if (dockCollection[listBoxDocks.SelectedItem.ToString()] + ship)
+                        {
+                            Draw();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Док переполнен");
+                        }
                     }
                 }
             }
@@ -90,18 +132,49 @@ namespace WindowsFormsWarships
         /// <param name="e"></param>
         private void buttonTakeWarship_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox.Text != "")
+            if (listBoxDocks.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var car = parking - Convert.ToInt32(maskedTextBox.Text);
-                if (car != null)
+                var ship = dockCollection[listBoxDocks.SelectedItem.ToString()] -
+                Convert.ToInt32(maskedTextBox.Text);
+                if (ship != null)
                 {
                     FormLinkor form = new FormLinkor();
-                    form.SetWarship(car);
+                    form.SetWarship(ship);
                     form.ShowDialog();
                 }
                 Draw();
             }
         }
 
+        private void buttonAddDock_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxDockName.Text))
+            {
+                MessageBox.Show("Введите название дока", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            dockCollection.AddDock(textBoxDockName.Text);
+            
+            ReloadLevels();
+        }
+
+        private void buttonDelDock_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить док { listBoxDocks.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+{
+                    dockCollection.DelDock(listBoxDocks.SelectedItem.ToString());
+
+                    ReloadLevels();
+                    
+                }
+            }
+        }
+
+        private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
     }
 }
