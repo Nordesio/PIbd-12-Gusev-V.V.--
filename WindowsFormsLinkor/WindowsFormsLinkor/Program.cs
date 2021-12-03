@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
+    public delegate void Action<Vehicle>(Vehicle ship);
     static class Program
     {
         /// <summary>

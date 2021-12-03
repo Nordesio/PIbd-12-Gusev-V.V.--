@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     public abstract class Vehicle : ITransport
     {
@@ -44,6 +44,19 @@ namespace WindowsFormsWarships
             _pictureWidth = width;
             _pictureHeight = height;
         }
+        public void SetSpeed(int speed)
+        {
+            MaxSpeed = speed;
+        }
+        public void SetWeight(float new_weight)
+        {
+            Weight = new_weight;
+        }
+        public void SetMainColor(Color color) 
+        {
+            MainColor = color;
+        }
+        
         public abstract void DrawTransport(Graphics g);
         public abstract void MoveTransport(Directions direction);
     }

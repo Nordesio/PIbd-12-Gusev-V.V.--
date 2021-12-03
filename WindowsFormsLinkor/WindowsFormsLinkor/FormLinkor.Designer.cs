@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsWarships
+﻿namespace WindowsFormsShips
 {
     partial class FormLinkor
     {

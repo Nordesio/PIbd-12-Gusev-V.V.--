@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     /// <summary>
     /// Класс-коллекция доков
@@ -71,6 +71,5 @@ public void AddDock(string name)
                 else return null;
             }
         }
-      
     }
 }

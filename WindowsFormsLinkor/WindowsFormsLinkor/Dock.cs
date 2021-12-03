@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     /// <summary>
     /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    
     public class Dock<T> where T : class, ITransport
     {
         /// <summary>
