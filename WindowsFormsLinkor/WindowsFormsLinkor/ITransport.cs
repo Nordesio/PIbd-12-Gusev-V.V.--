@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     public interface ITransport
     {
@@ -30,5 +30,10 @@ void SetPosition(int x, int y, int width, int height);
         /// </summary>
         /// <param name="g"></param>
         void DrawTransport(Graphics g);
+        /// <summary>
+        /// Смена основного цвета
+        /// </summary>
+        /// <param name="color"></param>
+        void SetMainColor(Color color);
     }
 }

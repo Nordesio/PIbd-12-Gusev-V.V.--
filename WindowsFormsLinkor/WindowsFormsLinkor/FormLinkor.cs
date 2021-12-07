@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     public partial class FormLinkor : Form
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsWarships.Properties
+namespace WindowsFormsShips.Properties
 {
 
 

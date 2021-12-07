@@ -8,26 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     public partial class FormDock : Form
     {
         /// <summary>
         /// Объект от класса-дока
         /// </summary>
-       
+
         private readonly DockCollection dockCollection;
 
         public FormDock()
         {
             InitializeComponent();
-            dockCollection = new DockCollection(pictureBoxDock.Width,pictureBoxDock.Height);
+            dockCollection = new DockCollection(pictureBoxDock.Width, pictureBoxDock.Height);
             Draw();
         }
         /// <summary>
         /// Метод отрисовки парковки
         /// </summary>
-       
+
         /// <summary>
         /// Заполнение listBoxLevels
         /// </summary>
@@ -35,18 +35,18 @@ namespace WindowsFormsWarships
         {
             int index = listBoxDocks.SelectedIndex;
             listBoxDocks.Items.Clear();
-            
+
             for (int i = 0; i < dockCollection.Keys.Count; i++)
             {
                 listBoxDocks.Items.Add(dockCollection.Keys[i]);
-                
+
             }
-            if (listBoxDocks.Items.Count > 0 && (index == -1 || index >=listBoxDocks.Items.Count))
+            if (listBoxDocks.Items.Count > 0 && (index == -1 || index >= listBoxDocks.Items.Count))
             {
                 listBoxDocks.SelectedIndex = 0;
 
             }
-            else if (listBoxDocks.Items.Count > 0 && index > -1 && index <listBoxDocks.Items.Count)
+            else if (listBoxDocks.Items.Count > 0 && index > -1 && index < listBoxDocks.Items.Count)
             {
                 listBoxDocks.SelectedIndex = index;
 
@@ -69,62 +69,8 @@ namespace WindowsFormsWarships
                 pictureBoxDock.Image = bmp;
             }
         }
-        /// <summary>
-        /// Обработка нажатия кнопки "Добавить боевой корабль"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetWarship_Click(object sender, EventArgs e)
-        {
-            if (listBoxDocks.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var ship = new Warship(100, 1000, dialog.Color);
-                    if (dockCollection[listBoxDocks.SelectedItem.ToString()] + ship)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
 
-                        MessageBox.Show("Док переполнен");
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// Обработка нажатия кнопки "Добавить линкор"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetLinkor_Click(object sender, EventArgs e)
 
-        {
-            if (listBoxDocks.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-
-                    {
-
-                        var ship = new Linkor(100, 1000, dialog.Color, dialogDop.Color, true, true, true);
-                        if (dockCollection[listBoxDocks.SelectedItem.ToString()] + ship)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Док переполнен");
-                        }
-                    }
-                }
-            }
-        }
         /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>
@@ -154,7 +100,7 @@ namespace WindowsFormsWarships
                 return;
             }
             dockCollection.AddDock(textBoxDockName.Text);
-            
+
             ReloadLevels();
         }
 
@@ -163,11 +109,11 @@ namespace WindowsFormsWarships
             if (listBoxDocks.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить док { listBoxDocks.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-{
+                {
                     dockCollection.DelDock(listBoxDocks.SelectedItem.ToString());
 
                     ReloadLevels();
-                    
+
                 }
             }
         }
@@ -175,6 +121,33 @@ namespace WindowsFormsWarships
         private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+
+        private void buttonSetShip_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                var formShipConfig = new FormShipConfig();
+                formShipConfig.AddEvent(AddShip);
+                formShipConfig.Show();
+            }
+            
+        }
+       
+        private void AddShip(Vehicle ship)
+        {
+            if (ship != null && listBoxDocks.SelectedIndex > -1)
+            {
+                if ((dockCollection[listBoxDocks.SelectedItem.ToString()]) + ship)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Корабль не удалось поставить");
+                }
+            }
         }
     }
 }

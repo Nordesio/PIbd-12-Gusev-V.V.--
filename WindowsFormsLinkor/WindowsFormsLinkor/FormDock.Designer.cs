@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsWarships
+namespace WindowsFormsShips
 {
     partial class FormDock
     {
@@ -30,8 +30,7 @@ namespace WindowsFormsWarships
         private void InitializeComponent()
         {
             this.pictureBoxDock = new System.Windows.Forms.PictureBox();
-            this.buttonSetWarship = new System.Windows.Forms.Button();
-            this.buttonSetLinkor = new System.Windows.Forms.Button();
+            this.buttonSetShip = new System.Windows.Forms.Button();
             this.buttonTakeWarship = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,36 +51,29 @@ namespace WindowsFormsWarships
             // 
             this.pictureBoxDock.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBoxDock.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxDock.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxDock.Name = "pictureBoxDock";
-            this.pictureBoxDock.Size = new System.Drawing.Size(754, 450);
+            this.pictureBoxDock.Size = new System.Drawing.Size(1005, 554);
             this.pictureBoxDock.TabIndex = 0;
             this.pictureBoxDock.TabStop = false;
             // 
-            // buttonSetWarship
+            // buttonSetShip
             // 
-            this.buttonSetWarship.Location = new System.Drawing.Point(767, 232);
-            this.buttonSetWarship.Name = "buttonSetWarship";
-            this.buttonSetWarship.Size = new System.Drawing.Size(90, 50);
-            this.buttonSetWarship.TabIndex = 1;
-            this.buttonSetWarship.Text = "Добавить боевой корабль";
-            this.buttonSetWarship.UseVisualStyleBackColor = true;
-            this.buttonSetWarship.Click += new System.EventHandler(this.buttonSetWarship_Click);
-            // 
-            // buttonSetLinkor
-            // 
-            this.buttonSetLinkor.Location = new System.Drawing.Point(767, 288);
-            this.buttonSetLinkor.Name = "buttonSetLinkor";
-            this.buttonSetLinkor.Size = new System.Drawing.Size(87, 34);
-            this.buttonSetLinkor.TabIndex = 2;
-            this.buttonSetLinkor.Text = "Добавить линкор";
-            this.buttonSetLinkor.UseVisualStyleBackColor = true;
-            this.buttonSetLinkor.Click += new System.EventHandler(this.buttonSetLinkor_Click);
+            this.buttonSetShip.Location = new System.Drawing.Point(1022, 343);
+            this.buttonSetShip.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSetShip.Name = "buttonSetShip";
+            this.buttonSetShip.Size = new System.Drawing.Size(120, 53);
+            this.buttonSetShip.TabIndex = 1;
+            this.buttonSetShip.Text = "Добавить корабль";
+            this.buttonSetShip.UseVisualStyleBackColor = true;
+            this.buttonSetShip.Click += new System.EventHandler(this.buttonSetShip_Click);
             // 
             // buttonTakeWarship
             // 
-            this.buttonTakeWarship.Location = new System.Drawing.Point(7, 76);
+            this.buttonTakeWarship.Location = new System.Drawing.Point(9, 94);
+            this.buttonTakeWarship.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTakeWarship.Name = "buttonTakeWarship";
-            this.buttonTakeWarship.Size = new System.Drawing.Size(75, 23);
+            this.buttonTakeWarship.Size = new System.Drawing.Size(100, 28);
             this.buttonTakeWarship.TabIndex = 3;
             this.buttonTakeWarship.Text = "Забрать";
             this.buttonTakeWarship.UseVisualStyleBackColor = true;
@@ -93,59 +85,68 @@ namespace WindowsFormsWarships
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.maskedTextBox);
             this.groupBox1.Controls.Add(this.buttonTakeWarship);
-            this.groupBox1.Location = new System.Drawing.Point(760, 328);
+            this.groupBox1.Location = new System.Drawing.Point(1013, 404);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(97, 110);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(129, 135);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 50);
+            this.label2.Location = new System.Drawing.Point(9, 62);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.Size = new System.Drawing.Size(49, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "Место";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 16);
+            this.label1.Location = new System.Drawing.Point(4, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(121, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "Забрать корабль";
             // 
             // maskedTextBox
             // 
-            this.maskedTextBox.Location = new System.Drawing.Point(52, 50);
+            this.maskedTextBox.Location = new System.Drawing.Point(69, 62);
+            this.maskedTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.maskedTextBox.Name = "maskedTextBox";
-            this.maskedTextBox.Size = new System.Drawing.Size(30, 20);
+            this.maskedTextBox.Size = new System.Drawing.Size(39, 22);
             this.maskedTextBox.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 9);
+            this.label3.Location = new System.Drawing.Point(56, 11);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(46, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "Доки:";
             // 
             // textBoxDockName
             // 
-            this.textBoxDockName.Location = new System.Drawing.Point(6, 25);
+            this.textBoxDockName.Location = new System.Drawing.Point(8, 31);
+            this.textBoxDockName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDockName.Name = "textBoxDockName";
-            this.textBoxDockName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDockName.Size = new System.Drawing.Size(132, 22);
             this.textBoxDockName.TabIndex = 8;
             // 
             // listBoxDocks
             // 
             this.listBoxDocks.FormattingEnabled = true;
-            this.listBoxDocks.Location = new System.Drawing.Point(6, 80);
+            this.listBoxDocks.ItemHeight = 16;
+            this.listBoxDocks.Location = new System.Drawing.Point(8, 98);
+            this.listBoxDocks.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxDocks.Name = "listBoxDocks";
-            this.listBoxDocks.Size = new System.Drawing.Size(100, 95);
+            this.listBoxDocks.Size = new System.Drawing.Size(132, 116);
             this.listBoxDocks.TabIndex = 9;
             this.listBoxDocks.SelectedIndexChanged += new System.EventHandler(this.listBoxDocks_SelectedIndexChanged);
             // 
@@ -156,17 +157,20 @@ namespace WindowsFormsWarships
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.textBoxDockName);
             this.groupBox2.Controls.Add(this.listBoxDocks);
-            this.groupBox2.Location = new System.Drawing.Point(760, 12);
+            this.groupBox2.Location = new System.Drawing.Point(1013, 15);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(118, 214);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(157, 263);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
             // buttonDelDock
             // 
-            this.buttonDelDock.Location = new System.Drawing.Point(10, 185);
+            this.buttonDelDock.Location = new System.Drawing.Point(13, 228);
+            this.buttonDelDock.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDelDock.Name = "buttonDelDock";
-            this.buttonDelDock.Size = new System.Drawing.Size(88, 23);
+            this.buttonDelDock.Size = new System.Drawing.Size(117, 28);
             this.buttonDelDock.TabIndex = 7;
             this.buttonDelDock.Text = "Удалить док";
             this.buttonDelDock.UseVisualStyleBackColor = true;
@@ -174,9 +178,10 @@ namespace WindowsFormsWarships
             // 
             // buttonAddDock
             // 
-            this.buttonAddDock.Location = new System.Drawing.Point(7, 51);
+            this.buttonAddDock.Location = new System.Drawing.Point(9, 63);
+            this.buttonAddDock.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAddDock.Name = "buttonAddDock";
-            this.buttonAddDock.Size = new System.Drawing.Size(90, 23);
+            this.buttonAddDock.Size = new System.Drawing.Size(120, 28);
             this.buttonAddDock.TabIndex = 13;
             this.buttonAddDock.Text = "Добавить док";
             this.buttonAddDock.UseVisualStyleBackColor = true;
@@ -184,14 +189,14 @@ namespace WindowsFormsWarships
             // 
             // FormDock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 450);
+            this.ClientSize = new System.Drawing.Size(1159, 554);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonSetLinkor);
-            this.Controls.Add(this.buttonSetWarship);
+            this.Controls.Add(this.buttonSetShip);
             this.Controls.Add(this.pictureBoxDock);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormDock";
             this.Text = "Док";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDock)).EndInit();
@@ -206,8 +211,7 @@ namespace WindowsFormsWarships
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxDock;
-        private System.Windows.Forms.Button buttonSetWarship;
-        private System.Windows.Forms.Button buttonSetLinkor;
+        private System.Windows.Forms.Button buttonSetShip;
         private System.Windows.Forms.Button buttonTakeWarship;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
