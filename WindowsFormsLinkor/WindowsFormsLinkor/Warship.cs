@@ -19,6 +19,10 @@ namespace WindowsFormsShips
         /// </summary>
         protected readonly int warshipHeight = 60;
         /// <summary>
+        /// Разделитель для записи информации по объекту в файл
+        /// </summary>
+        protected readonly char separator = ';';
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -46,6 +50,20 @@ namespace WindowsFormsShips
             MainColor = mainColor;
             this.warshipWidth = warshipWidth;
             this.warshipHeight = warshipHeight;
+        }
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Warship(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
         }
         public override void MoveTransport(Directions direction)
         {
@@ -115,6 +133,10 @@ namespace WindowsFormsShips
             g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 5, 8, 8);
             g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 15, 8, 8);
             g.FillEllipse(br_dop, _startPosX + 10, _startPosY + 25, 8, 8);
+        }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
         }
     }
 }
