@@ -134,7 +134,7 @@ public void AddDock(string name)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename))
             {
@@ -146,7 +146,7 @@ public void AddDock(string name)
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    return false;
+                    throw new FormatException("Неверный формат файла");
 
                 }
                 Vehicle ship = null;
@@ -173,14 +173,10 @@ public void AddDock(string name)
                     {
                         ship = new Linkor(line.Split(separator)[1]);
                     }
-                    if (!dockStages.ContainsKey(key))
+                    
+                    if (!(dockStages[key] + ship))
                     {
-                        return false;
-                    }
-                    var result = dockStages[key] + ship;
-                    if (!result)
-                    {
-                        return false;
+                        throw new TypeLoadException("Не удалось загрузить корабль в док");
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,12 +18,16 @@ namespace WindowsFormsShips
         /// </summary>
 
         private readonly DockCollection dockCollection;
+        /// <summary>
+        /// Логгер
+        /// </summary>
+        private readonly Logger logger;
 
         public FormDock()
         {
             InitializeComponent();
             dockCollection = new DockCollection(pictureBoxDock.Width, pictureBoxDock.Height);
-            Draw();
+            logger = LogManager.GetCurrentClassLogger();
         }
         /// <summary>
         /// Метод отрисовки парковки
@@ -70,7 +75,35 @@ namespace WindowsFormsShips
             }
         }
 
-
+        private void AddShip(Vehicle ship)
+        {
+            if (ship != null && listBoxDocks.SelectedIndex > -1)
+            {
+                try
+                {
+                    if ((dockCollection[listBoxDocks.SelectedItem.ToString()]) + ship)
+                    {
+                        Draw();
+                        logger.Info($"Добавлен корабль {ship}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Корабль не удалось поставить");
+                    }
+                    Draw();
+                }
+                catch (DockOverflowException ex)
+                {
+                    logger.Warn($"Попытка поставить корабль в уже заполненный док");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn($"Неизвестная ошибка по вставке корабля");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
         /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>
@@ -80,18 +113,38 @@ namespace WindowsFormsShips
         {
             if (listBoxDocks.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var ship = dockCollection[listBoxDocks.SelectedItem.ToString()] -
-                Convert.ToInt32(maskedTextBox.Text);
-                if (ship != null)
+                try
                 {
-                    FormLinkor form = new FormLinkor();
-                    form.SetWarship(ship);
-                    form.ShowDialog();
+                    var ship = dockCollection[listBoxDocks.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+
+
+                    if (ship != null)
+                    {
+                        FormLinkor form = new FormLinkor();
+                        form.SetWarship(ship);
+                        form.ShowDialog();
+                        logger.Info($"Изъят корабль {ship} с места { maskedTextBox.Text}");
+
+                        Draw();
+                    }
                 }
-                Draw();
+                catch (DockNotFoundException ex)
+                {
+                    logger.Warn($"Попытка забрать корабль с несуществующего места");
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn($"Неизвестная ошибка по забиранию корабля");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить док"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddDock_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxDockName.Text))
@@ -99,17 +152,23 @@ namespace WindowsFormsShips
                 MessageBox.Show("Введите название дока", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info($"Добавили док {textBoxDockName.Text}");
             dockCollection.AddDock(textBoxDockName.Text);
 
             ReloadLevels();
         }
-
+        /// <summary>
+        /// Обработка нажатия кнопки "Удалить док"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDelDock_Click(object sender, EventArgs e)
         {
             if (listBoxDocks.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить док { listBoxDocks.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалили док {listBoxDocks.SelectedItem.ToString()}");
                     dockCollection.DelDock(listBoxDocks.SelectedItem.ToString());
 
                     ReloadLevels();
@@ -117,9 +176,14 @@ namespace WindowsFormsShips
                 }
             }
         }
-
+        /// <summary>
+        /// Метод обработки выбора элемента на listBoxLevels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли в док { listBoxDocks.SelectedItem.ToString()}");
             Draw();
         }
 
@@ -135,20 +199,7 @@ namespace WindowsFormsShips
             
         }
        
-        private void AddShip(Vehicle ship)
-        {
-            if (ship != null && listBoxDocks.SelectedIndex > -1)
-            {
-                if ((dockCollection[listBoxDocks.SelectedItem.ToString()]) + ship)
-                {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Корабль не удалось поставить");
-                }
-            }
-        }
+      
         /// <summary>
         /// Обработка нажатия пункта меню "Сохранить"
         /// </summary>
@@ -158,13 +209,16 @@ namespace WindowsFormsShips
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (dockCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    dockCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn($"Неизвестная ошибка сохранения");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -177,17 +231,30 @@ namespace WindowsFormsShips
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (dockCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    dockCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
-
                 }
-                else
+                catch (FormatException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn($"Ошибка формата загружаемого файла") ;
+                    MessageBox.Show(ex.Message, "Ошибка формата", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                catch (DockOverflowException ex)
+                {
+                    logger.Warn($"Попытка вставить корабль при загрузке в занятое место");
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn($"Неизвестная ошибка загрузки");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
         }
     }

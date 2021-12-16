@@ -57,10 +57,10 @@ namespace WindowsFormsShips
             // pictureBoxDock
             // 
             this.pictureBoxDock.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxDock.Location = new System.Drawing.Point(0, 28);
+            this.pictureBoxDock.Location = new System.Drawing.Point(0, 30);
             this.pictureBoxDock.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxDock.Name = "pictureBoxDock";
-            this.pictureBoxDock.Size = new System.Drawing.Size(1005, 526);
+            this.pictureBoxDock.Size = new System.Drawing.Size(1005, 524);
             this.pictureBoxDock.TabIndex = 0;
             this.pictureBoxDock.TabStop = false;
             // 
@@ -201,7 +201,7 @@ namespace WindowsFormsShips
             this.файлToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1159, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1159, 30);
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -211,7 +211,7 @@ namespace WindowsFormsShips
             this.сохранитьToolStripMenuItem,
             this.загрузитьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // сохранитьToolStripMenuItem

@@ -72,18 +72,11 @@ public Dock(int picWidth, int picHeight)
         {
             if (p._places.Count >= p._maxCount)
             {
-                return false;
+                throw new DockOverflowException();
             }
-           for(int i = 0; i < p._maxCount; i++)
-            {
-                if (p._places.Contains(warship) == false)
-                {
-                    p._places.Add(warship);
-                    return true;
-                }
 
-            }
-            return false;
+                p._places.Add(warship);
+                return true;
         }
         /// <summary>
         /// Перегрузка оператора вычитания
@@ -95,21 +88,13 @@ public Dock(int picWidth, int picHeight)
         /// <returns></returns>
         public static T operator -(Dock<T> p, int index)
         {
-            if (p._places.Count - 1< index)
+            if (index < -1 || index > p._places.Count)
             {
-                return null;
+                throw new DockNotFoundException(index);
             }
-                if (index < p._maxCount)
-            {
-                T a = p._places[index];
-               
-                p._places.RemoveAt(index);
-                return a;
-            }
-            else
-            {
-                return null;
-            }
+            T warship = p._places[index];
+            p._places.RemoveAt(index);
+            return warship;
         }
         /// <summary>
         /// Метод отрисовки дока
