@@ -186,42 +186,7 @@ public void AddDock(string name)
             }
             return true;
         }
-        public bool SaveLevel(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                File.Delete(filename);
-            }
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                foreach (var level in dockStages)
-                {
-                        //Начинаем парковку
-                        sw.Write($"Dock{separator}{level.Key}{Environment.NewLine}");
-                        ITransport ship = null;
-                        for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
-                        {
-                            if (ship != null)
-                            {
-                                //если место не пустое
-                                //Записываем тип корабля
-                                if (ship.GetType().Name == "Warship")
-                                {
-                                    sw.Write($"Warship{separator}");
-                                }
-                                if (ship.GetType().Name == "Linkor")
-                                {
-                                    sw.Write($"Linkor{separator}");
-                                }
-                                //Записываемые параметры
-                                sw.Write(ship + Environment.NewLine);
-
-                            }
-                        }
-                }
-            }
-            return true;
-        }
+      
 
     }
 }
