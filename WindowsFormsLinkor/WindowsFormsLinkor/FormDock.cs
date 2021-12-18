@@ -257,5 +257,15 @@ namespace WindowsFormsShips
 
             }
         }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                dockCollection[listBoxDocks.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
+            }
+        }
     }
 }

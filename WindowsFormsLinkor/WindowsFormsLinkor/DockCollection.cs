@@ -96,30 +96,24 @@ public void AddDock(string name)
                     //Начинаем парковку
 
                     sw.Write($"Dock{separator}{level.Key}{Environment.NewLine}");
-                    ITransport ship = null;
-
-                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport ship in level.Value)
                     {
-                        if (ship != null)
+                        //Записываем тип мшаины
+                        if (ship.GetType().Name == "Warship")
+
                         {
-                            //если место не пустое
-                            //Записываем тип корабля
-                            if (ship.GetType().Name == "Warship")
-
-                            {
-                                sw.Write($"Warship{separator}");
-                            }
-
-                            if (ship.GetType().Name == "Linkor")
-
-                            {
-                                sw.Write($"Linkor{separator}");
-                            }
-
-                            //Записываемые параметры
-                            sw.Write(ship + Environment.NewLine);
-
+                            sw.Write($"Warship{separator}");
                         }
+
+                        if (ship.GetType().Name == "Linkor")
+
+                        {
+                            sw.Write($"Linkor{separator}");
+                        }
+
+                        //Записываемые параметры
+                        sw.Write(ship + Environment.NewLine);
+
                     }
                 }
             }
