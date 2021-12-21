@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,8 @@ namespace WindowsFormsShips
     /// </summary>
     /// <typeparam name="T"></typeparam>
     
-    public class Dock<T> where T : class, ITransport
+    public class Dock<T> : IEnumerator<T>, IEnumerable<T> 
+        where T : class, ITransport
     {
         /// <summary>
         /// Список объектов, которые храним
@@ -39,15 +41,20 @@ namespace WindowsFormsShips
         /// Размер одного места дока (высота)
         /// </summary>
         private readonly int _placeSizeHeight = 80;
+        /// <summary>
+        /// Текущий элемент для вывода через IEnumerator (будет обращаться по своему индексу к ключу словаря, по которму будет возвращаться запись)
+        /// </summary>
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
 
 
-
-/// <summary>
-/// Конструктор
-/// </summary>
-/// <param name="picWidth">Рамзер дока - ширина</param>
-/// <param name="picHeight">Рамзер парковки - высота</param>
-public Dock(int picWidth, int picHeight)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="picWidth">Рамзер дока - ширина</param>
+        /// <param name="picHeight">Рамзер парковки - высота</param>
+        public Dock(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
@@ -55,6 +62,7 @@ public Dock(int picWidth, int picHeight)
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _places = new List<T>();
+            _currentIndex = -1;
         }
 
 
@@ -74,8 +82,11 @@ public Dock(int picWidth, int picHeight)
             {
                 throw new DockOverflowException();
             }
-
-                p._places.Add(warship);
+            if (p._places.Contains(warship))
+            {
+                throw new DockAlreadyHaveException();
+            }
+            p._places.Add(warship);
                 return true;
         }
         /// <summary>
@@ -141,6 +152,46 @@ public Dock(int picWidth, int picHeight)
                 return null;
             }
             return _places[index];
+        }
+        /// <summary>
+        /// Сортировка автомобилей на парковке
+        /// </summary>
+        public void Sort() => _places.Sort((IComparer<T>)new ShipComparer());
+        /// <summary>
+        /// Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        /// </summary>
+        public void Dispose()
+        {
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для перехода к следующему элементу или началу коллекции
+        /// </summary>
+        /// <returns></returns>
+        public bool MoveNext()
+        {
+            _currentIndex++;
+            return (_currentIndex < _places.Count());
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        /// </summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }
